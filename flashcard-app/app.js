@@ -36,4 +36,35 @@ document.getElementById('next').onclick = function() {
     renderCard();
   }
 };
+document.getElementById('share-btn').onclick = function() {
+  if (!flashcards.length) return;
+  const card = flashcards[current];
+  // For demo, copy question+answer as text
+  const shareText = `Flashcard\nQ: ${card.question}\nA: ${card.answer}`;
+  navigator.clipboard.writeText(shareText).then(() => {
+    alert('Flashcard copied to clipboard! Share it anywhere you like.');
+  });
+};
+// Dummy trending data - you can expand!
+const trending = [
+  { question: "What is the capital of France?", answer: "Paris" },
+  { question: "2 + 2 × 2 = ?", answer: "6" },
+  { question: "Largest mammal?", answer: "Blue whale" },
+  { question: "Photosynthesis makes what?", answer: "Glucose & Oxygen" },
+  { question: "Meaning of 'carpe diem'?", answer: "Seize the day" },
+  { question: "Who wrote 'Romeo and Juliet'?", answer: "William Shakespeare" },
+  // ...more!
+];
+
+function renderTrending() {
+  const trendDiv = document.getElementById('trending-cards');
+  trendDiv.innerHTML = trending.map(card => `
+    <div class="trending-card">
+      <div class="trending-q">${card.question}</div>
+      <div class="trending-a">${card.answer}</div>
+    </div>
+  `).join('');
+}
+renderTrending();
+
 renderCard();
