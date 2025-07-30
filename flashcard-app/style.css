@@ -101,3 +101,40 @@ button:hover {
     font-size: 1.1rem;
   }
 }
+#trending-cards {
+  display: flex;
+  overflow-x: auto;
+  gap: 18px;
+  padding: 12px 0 36px 0;
+  margin: 0 auto;
+  max-width: 95vw;
+}
+.trending-card {
+  background: #fff;
+  border: 2px solid #ffd6e6;
+  border-radius: 14px;
+  min-width: 220px;
+  max-width: 240px;
+  box-shadow: 0 2px 8px #fab3ce66;
+  padding: 20px 14px;
+  color: #d72660;
+  font-size: 1.08rem;
+  flex: 0 0 auto;
+  transition: transform .12s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.trending-card:hover {
+  transform: translateY(-6px) scale(1.045);
+  box-shadow: 0 8px 24px #d7266055;
+}
+.trending-q {
+  font-weight: bold;
+  margin-bottom: 9px;
+}
+.trending-a {
+  font-size: .99em;
+  opacity: .75;
+}
