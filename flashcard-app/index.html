@@ -6,25 +6,103 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <h1>Flashcard App</h1>
-    <form id="flashcard-form">
-      <input type="text" id="question" placeholder="Question" required>
-      <input type="text" id="answer" placeholder="Answer" required>
-      <button type="submit">Add Flashcard</button>
-    </form>
-    <div id="flashcard-container"></div>
-    <div style="display: flex; justify-content: center; gap: 16px; margin-bottom: 8px;">
-        <button id="prev">Previous</button>
-        <button id="next">Next</button>
-    </div>
-<button id="share-btn">Share this Flashcard</button>
+  <div id="page-container">
+    <main id="main-content">
+      <!-- Cute theme/color/font menu -->
+      <div id="theme-area">
+        <div class="theme-row">
+          <span class="theme-label">✨ Theme:</span>
+          <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle" />
+            <span class="slider"></span>
+          </label>
+          <span class="theme-label" style="margin-left:12px;">Card Color:</span>
+          <select id="card-color-select">
+            <option value="#fff">White</option>
+            <option value="#ffe0ec">Pastel Pink</option>
+            <option value="#e6faff">Pastel Blue</option>
+            <option value="#f9ffe3">Pastel Yellow</option>
+            <option value="#e9ffe6">Pastel Green</option>
+            <option value="#f1e4ff">Pastel Purple</option>
+          </select>
+          <span class="theme-label" style="margin-left:12px;">Font:</span>
+          <select id="font-select">
+            <option value="Segoe UI, Arial, sans-serif">Default</option>
+            <option value="Comic Sans MS, Comic Sans, cursive">Comic Sans</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="Courier New, monospace">Courier New</option>
+            <option value="Verdana, Geneva, sans-serif">Verdana</option>
+          </select>
+        </div>
+      </div>
 
+      <!-- My Decks at the top -->
+      <section id="my-decks-area">
+        <div class="deck-tools">
+          <input type="text" id="deck-search" placeholder="Search decks..." />
+          <select id="deck-filter">
+            <option value="">All Tags</option>
+            <option value="Biology">Biology</option>
+            <option value="History">History</option>
+            <option value="Math">Math</option>
+            <option value="Favorites">Favorites</option>
+            <option value="Language">Language</option>
+            <option value="Other">Other</option>
+          </select>
+          <button id="merge-mode-btn" type="button">Merge Mode</button>
+        </div>
+        <h2 style="color:#d72660; font-size:1.18em; margin-bottom:8px;">My Decks</h2>
+        <div id="user-menu"></div>
+        <div id="merge-hint" style="display:none; color:#b14579; margin-top:7px;">Select two decks to merge.</div>
+      </section>
+
+      <div id="app">
+        <h1>Flashcard App</h1>
+        <div id="badge-area"></div>
+        <form id="deck-form">
+          <input type="text" id="deck-title-input" placeholder="Enter deck title" required>
+          <select id="deck-tag-input">
+            <option value="">No Tag</option>
+            <option value="Biology">Biology</option>
+            <option value="History">History</option>
+            <option value="Math">Math</option>
+            <option value="Favorites">Favorites</option>
+            <option value="Language">Language</option>
+            <option value="Other">Other</option>
+          </select>
+          <button type="submit">Start New Deck</button>
+        </form>
+        <div id="current-deck-title"></div>
+        <form id="flashcard-form">
+          <input type="text" id="question" placeholder="Question" required>
+          <input type="text" id="answer" placeholder="Answer" required>
+          <button type="submit">Add Flashcard</button>
+        </form>
+        <div id="flashcard-container"></div>
+        <div class="controls-row" id="flashcard-controls"></div>
+        <div class="controls-row">
+          <button id="prev">Previous</button>
+          <button id="next">Next</button>
+          <button id="share-btn">Share this Flashcard</button>
+          <button id="quiz-mode-btn" type="button" style="margin-left: 10px;">Quiz Mode</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Trending Decks Sidebar -->
+    <aside id="trending-sidebar">
+      <h2 class="trending-title">Trending Decks</h2>
+      <div id="trending-decks"></div>
+    </aside>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close" id="close-quiz-btn">&times;</span>
+        <div id="quiz-main"></div>
+      </div>
+    </div>
   </div>
-<div>
-<h2 style="margin:30px 0 10px 0; color:#d72660; text-align:center;">Trending Flashcards</h2>
-<div id="trending-cards"></div>
-</div>
   <script src="app.js"></script>
 </body>
 </html>
