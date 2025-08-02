@@ -13,7 +13,7 @@ let mergeSelection = [];
 const trendingDecks = [
   {
     title: "World Capitals",
-    author: "alex_edu",
+    author: "bingbong",
     tag: "Geography",
     cards: [
       {question: "Capital of France?", answer: "Paris"},
@@ -23,7 +23,7 @@ const trendingDecks = [
   },
   {
     title: "SAT Vocab",
-    author: "maya_g",
+    author: "pickle",
     tag: "Language",
     cards: [
       {question: "Loquacious", answer: "Talkative"},
@@ -33,7 +33,7 @@ const trendingDecks = [
   },
   {
     title: "Basic Algebra",
-    author: "mathfan123",
+    author: "euclid",
     tag: "Math",
     cards: [
       {question: "Solve: x + 3 = 7", answer: "x = 4"},
@@ -43,7 +43,7 @@ const trendingDecks = [
   },
   {
     title: "US Presidents",
-    author: "historybuff",
+    author: "jamesmadison",
     tag: "History",
     cards: [
       {question: "1st US President?", answer: "George Washington"},
@@ -53,7 +53,7 @@ const trendingDecks = [
   },
   {
     title: "Spanish Basics",
-    author: "luna_lang",
+    author: "lang",
     tag: "Language",
     cards: [
       {question: "Hola", answer: "Hello"},
