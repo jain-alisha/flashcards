@@ -580,3 +580,34 @@ body.dark .modal-content { background: #221a29; color: #ffc2da; }
   .user-deck, .trending-deck { min-width: 94vw; max-width: 99vw; }
   .modal-content { max-width: 99vw; }
 }
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+  gap: 12px;
+  max-width: 600px;
+  margin: 20px auto;
+}
+.memory-card {
+  background: #ffe0ec;
+  border: 2px solid #fab3ce;
+  border-radius: 12px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+}
+.memory-card.flipped {
+  background: #fff4fa;
+}
+.hidden {
+  visibility: hidden;
+}
+.memory-card.matched {
+  background: #d72660;
+  color: #fff;
+  border-color: #d72660;
+  cursor: default;
+}
