@@ -598,12 +598,10 @@ body.dark .modal-content { background: #221a29; color: #ffc2da; }
   font-size: 1.1rem;
   cursor: pointer;
   user-select: none;
+  transition: background .16s, color .16s;
 }
 .memory-card.flipped {
   background: #fff4fa;
-}
-.hidden {
-  visibility: hidden;
 }
 .memory-card.matched {
   background: #d72660;
@@ -611,3 +609,9 @@ body.dark .modal-content { background: #221a29; color: #ffc2da; }
   border-color: #d72660;
   cursor: default;
 }
+#memory-timer {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.hidden {visibility: hidden;}
