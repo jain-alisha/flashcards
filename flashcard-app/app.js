@@ -17,6 +17,13 @@ const trendingDecks = [
       {question: "Capital of France?", answer: "Paris"},
       {question: "Capital of Japan?", answer: "Tokyo"},
       {question: "Capital of Brazil?", answer: "Brasília"},
+      {question: "Capital of Canada?", answer: "Ottawa"},
+      {question: "Capital of Australia?", answer: "Canberra"},
+      {question: "Capital of India?", answer: "New Delhi"},
+      {question: "Capital of Egypt?", answer: "Cairo"},
+      {question: "Capital of Germany?", answer: "Berlin"},
+      {question: "Capital of South Korea?", answer: "Seoul"},
+      {question: "Capital of Italy?", answer: "Rome"}
     ]
   },
   {
@@ -27,6 +34,13 @@ const trendingDecks = [
       {question: "Loquacious", answer: "Talkative"},
       {question: "Ephemeral", answer: "Lasting a very short time"},
       {question: "Obfuscate", answer: "To make unclear"},
+      {question: "Prosaic", answer: "Dull or unimaginative"},
+      {question: "Austere", answer: "Severe or strict in manner"},
+      {question: "Capricious", answer: "Impulsive or unpredictable"},
+      {question: "Gregarious", answer: "Sociable"},
+      {question: "Lethargic", answer: "Sluggish or apathetic"},
+      {question: "Ostentatious", answer: "Flashy or showy"},
+      {question: "Reticent", answer: "Reserved or quiet"}
     ]
   },
   {
@@ -37,6 +51,13 @@ const trendingDecks = [
       {question: "Solve: x + 3 = 7", answer: "x = 4"},
       {question: "What is 2(x+1)?", answer: "2x + 2"},
       {question: "Slope of y = 3x + 2?", answer: "3"},
+      {question: "What is the y-intercept of y = 2x + 5?", answer: "5"},
+      {question: "Simplify: 2x + 3x", answer: "5x"},
+      {question: "What is x if 5x = 20?", answer: "4"},
+      {question: "Expand: (x + 2)(x - 2)", answer: "x^2 - 4"},
+      {question: "What is the solution to x^2 = 9?", answer: "x = 3 or x = -3"},
+      {question: "Factor: x^2 + 2x + 1", answer: "(x + 1)^2"},
+      {question: "If f(x) = x^2, what is f(4)?", answer: "16"}
     ]
   },
   {
@@ -47,6 +68,13 @@ const trendingDecks = [
       {question: "1st US President?", answer: "George Washington"},
       {question: "President during Civil War?", answer: "Abraham Lincoln"},
       {question: "32nd President?", answer: "Franklin D. Roosevelt"},
+      {question: "Wrote the Declaration of Independence?", answer: "Thomas Jefferson"},
+      {question: "Youngest President?", answer: "Theodore Roosevelt"},
+      {question: "President after JFK?", answer: "Lyndon B. Johnson"},
+      {question: "President during WWI?", answer: "Woodrow Wilson"},
+      {question: "Only president to resign?", answer: "Richard Nixon"},
+      {question: "Actor before president?", answer: "Ronald Reagan"},
+      {question: "Tallest president?", answer: "Abraham Lincoln"}
     ]
   },
   {
@@ -57,6 +85,13 @@ const trendingDecks = [
       {question: "Hola", answer: "Hello"},
       {question: "Gracias", answer: "Thank you"},
       {question: "Perro", answer: "Dog"},
+      {question: "Gato", answer: "Cat"},
+      {question: "Casa", answer: "House"},
+      {question: "Libro", answer: "Book"},
+      {question: "Agua", answer: "Water"},
+      {question: "Escuela", answer: "School"},
+      {question: "Comida", answer: "Food"},
+      {question: "Rojo", answer: "Red"}
     ]
   }
 ]
@@ -508,42 +543,98 @@ window.closeQuizMode = function() {
 }
 document.getElementById('close-quiz-btn').onclick = closeQuizMode
 
-// memory match mode
-document.getElementById('memory-mode-btn').addEventListener('click', () => {
-  startMemoryMatch()
+document.addEventListener('DOMContentLoaded', function() {
+  var memoryBtn = document.getElementById('memory-mode-btn')
+  if (memoryBtn) {
+    memoryBtn.addEventListener('click', startMemoryMatch)
+  }
+})
+
+let memoryTimerInterval = null
+let memoryStartTime = null
+
+document.addEventListener('DOMContentLoaded', function() {
+  var memoryBtn = document.getElementById('memory-mode-btn')
+  if (memoryBtn) {
+    memoryBtn.addEventListener('click', startMemoryMatch)
+  }
 })
 
 function startMemoryMatch() {
   if (!currentDeck || !currentDeck.cards.length) {
-    alert('please select a deck with cards')
+    alert('Please select a deck with cards')
     return
   }
-  let vals = currentDeck.cards.map(c => c.question)
-  let deck = shuffle([...vals, ...vals])
-  let board = document.getElementById('memory-board')
+  var pairs = []
+  currentDeck.cards.forEach(function(card) {
+    pairs.push({ value: card.question, match: card.answer, type: 'q' })
+    pairs.push({ value: card.answer, match: card.question, type: 'a' })
+  })
+  var deck = shuffle(pairs)
+  var board = document.getElementById('memory-board')
   board.innerHTML = ''
-  let first = null, lock = false
+  let timerDiv = document.getElementById('memory-timer')
+  timerDiv.textContent = "Time: 00:00.000"
+  timerDiv.style.display = "block"
 
-  deck.forEach(val => {
-    let card = document.createElement('div')
+  var first = null, lock = false, matched = 0
+
+  function formatTime(ms) {
+    let total = ms
+    let min = Math.floor(total / 60000)
+    total = total % 60000
+    let sec = Math.floor(total / 1000)
+    let msStr = String(total % 1000).padStart(3, '0')
+    return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}.${msStr}`
+  }
+
+  function updateTimer() {
+    if (!memoryStartTime) return
+    let ms = Date.now() - memoryStartTime
+    timerDiv.textContent = "Time: " + formatTime(ms)
+  }
+
+  memoryStartTime = Date.now()
+  updateTimer()
+  if (memoryTimerInterval) clearInterval(memoryTimerInterval)
+  memoryTimerInterval = setInterval(updateTimer, 31)
+
+  deck.forEach(function(pair) {
+    var card = document.createElement('div')
     card.className = 'memory-card'
-    card.dataset.val = val
+    card.dataset.value = pair.value
+    card.dataset.match = pair.match
     card.textContent = ''
     board.appendChild(card)
 
-    card.onclick = () => {
-      if (lock || card.classList.contains('flipped')) return
+    card.onclick = function() {
+      if (lock || card.classList.contains('flipped') || card.classList.contains('matched')) return
       card.classList.add('flipped')
-      card.textContent = val
+      card.textContent = pair.value
       if (!first) {
         first = card
       } else {
         lock = true
-        if (first.dataset.val === card.dataset.val) {
+        if (
+          (first.dataset.value === card.dataset.match && card.dataset.value === first.dataset.match)
+        ) {
+          first.classList.add('matched')
+          card.classList.add('matched')
+          matched += 2
           first = null
           lock = false
+          if (matched === deck.length) {
+            if (memoryTimerInterval) clearInterval(memoryTimerInterval)
+            let ms = Date.now() - memoryStartTime
+            timerDiv.textContent = "Time: " + formatTime(ms)
+            setTimeout(() => {
+              alert("You finished! Time: " + formatTime(ms))
+              timerDiv.style.display = "none"
+              board.innerHTML = ""
+            }, 600)
+          }
         } else {
-          setTimeout(() => {
+          setTimeout(function() {
             first.classList.remove('flipped')
             card.classList.remove('flipped')
             first.textContent = ''
@@ -558,8 +649,12 @@ function startMemoryMatch() {
 }
 
 function shuffle(array) {
-  return array.sort(() => Math.random() - 0.5)
+  return array.sort(function() { return Math.random() - 0.5 })
 }
+
+// make sure you keep the rest of your original app.js logic below!
+
+
 
 // initialize
 renderCurrentDeckTitle()
