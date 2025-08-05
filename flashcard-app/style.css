@@ -27,17 +27,7 @@ body.dark {
   align-items: center;
 }
 
-/* Wider "my decks" and app card area */
-#my-decks-area {
-  width: 740px;
-  max-width: 97vw;
-  margin: 36px auto 22px auto;
-  background: #fff4fa;
-  border-radius: 22px;
-  box-shadow: 0 2px 18px #fab3ce22;
-  padding: 22px 20px 12px 20px;
-  text-align: center;
-}
+
 
 #user-menu {
   display: flex;
@@ -615,3 +605,99 @@ body.dark .modal-content { background: #221a29; color: #ffc2da; }
 }
 
 .hidden {visibility: hidden;}
+#my-decks-area {
+  width: 90vw;
+  max-width: 980px;
+  min-height: 130px;
+  margin: 36px auto 22px auto;
+  background: #fff4fa;
+  border-radius: 22px;
+  box-shadow: 0 2px 18px #fab3ce22;
+  padding: 32px 24px 18px 24px;
+  text-align: center;
+}
+
+#app {
+  width: 94vw;
+  max-width: 1000px;
+  min-height: 620px;
+  margin: 44px auto 0 auto;
+  padding: 56px 44px 50px 44px;
+  background: #fff4fa;
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(220, 72, 140, 0.12);
+  text-align: center;
+}
+
+#flashcard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+  margin-bottom: 2px;
+}
+
+#card, .quiz-card {
+  background: var(--card-color, #fff);
+  color: #d72660;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 64px 60px;
+  min-width: 420px;
+  min-height: 230px;
+  max-width: 88vw;
+  max-height: 62vh;
+  border: 2.5px solid #fab3ce;
+  border-radius: 22px;
+  box-shadow: 0 6px 28px #fab3ce44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow 0.18s, background .22s;
+}
+
+.user-deck, .trending-deck {
+  background: #fff;
+  border: 2.5px solid #ffd6e6;
+  border-radius: 19px;
+  min-width: 220px;
+  max-width: 350px;
+  box-shadow: 0 2px 8px #fab3ce66;
+  padding: 28px 20px 20px 20px;
+  color: #d72660;
+  font-size: 1.12rem;
+  flex: 0 0 auto;
+  transition: transform .13s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 14px auto;
+}
+
+.controls-row {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 18px;
+}
+
+input[type="text"], select {
+  min-width: 150px;
+  max-width: 340px;
+  padding: 13px 15px;
+  margin: 0 6px;
+  border-radius: 7px;
+  font-size: 1.12em;
+  border: 1.5px solid #fab3ce;
+}
+
+button {
+  min-width: 120px;
+  font-size: 1.09em;
+  padding: 14px 36px;
+  border-radius: 9px;
+}
