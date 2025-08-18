@@ -6,3 +6,6 @@ The app is a basic flashcard app where you can select a deck (or make a new one!
 With an actual user base, I hope for it to become a place where students can publish public decks (hence the 'trending-decks' framework) for others to use. Once I learn more tools for AI recommendation systems, I think it would be a great addition to make!
 
 My project had a bit of a linear progression, where I was just planning to make a simple flashcard app and then started adding more features once ideas struck. My biggest struggle was honestly remembering a lot of the best practices and syntax, so I scoured a lot of reddit programming threads & stack overflow to get a good foundation to build my project on. I learned a lot of HTML/CSS tricks and methods that I didn't use in this app, but I am glad I have the knowledge in my toolkit.
+
+[![Athena Award Badge](https://img.shields.io/endpoint?url=https%3A%2F%2Faward.athena.hackclub.com%2Fapi%2Fbadge)](https://award.athena.hackclub.com?utm_source=readme)
+
